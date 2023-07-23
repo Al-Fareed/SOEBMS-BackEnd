@@ -9,4 +9,4 @@ const sell = new Schema({
     units:{type:Number, required: true}
 })
 
-module.exports = mongoose.model('sellers', sell);
+module.exports = mongoose.model('sells', sell);
