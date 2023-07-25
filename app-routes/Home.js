@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-// Step 1: Create a schema for the power usage data
+
 const powerUsageSchema = new Schema({
   year: {
     type: Number,
@@ -13,10 +13,9 @@ const powerUsageSchema = new Schema({
   },
 });
 
-// Step 2: Create a schema for the user's power usage
 const userPowerUsageSchema = new Schema({
   _id: {
-    type: String, // Assuming the userID is a string (e.g., "64bcb0e228523cd71278aa3b")
+    type: String, 
     required: true,
   },
   powerUsage: {
@@ -25,17 +24,20 @@ const userPowerUsageSchema = new Schema({
   },
 });
 
-// Step 3: Define a model based on the user power usage schema
 const UserPowerUsage = mongoose.model('power_usage', userPowerUsageSchema);
 
 const router = require('express').Router();
 
-// Step 4: Fetch the data from the database using the defined model
 router.get('/', (req, res, next) => {
-    console.log("start fetching ");
-  UserPowerUsage.find()
+    UserPowerUsage.find({ _id: "64bcb0e228523cd71278aa3b" }) // Only fetch the document with the specified _id
     .then((data) => {
-      res.json(data);
+      if (data.length === 0) {
+        res.status(404).json({ error: 'User not found' });
+      } else {
+        // Extract the powerUsage array from the fetched data
+        const powerUsage = data[0].powerUsage;
+        res.json(powerUsage);
+      }
     })
     .catch((err) => {
       console.log('Error fetching data', err);
