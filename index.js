@@ -5,9 +5,10 @@ const home = require("./app-routes/Home");
 const buy = require("./app-routes/buy");
 const sell = require("./app-routes/Sell");
 const app = express();
-
+const cors = require('cors');
 app.use(bodyParser.json());
 
+app.use(cors());
 // Attach routes to their endpoints
 app.use('/buy', buy);
 app.use('/sell', sell);

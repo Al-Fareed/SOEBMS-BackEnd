@@ -3,7 +3,7 @@ const router = require('express').Router();
 const sellModel = require('./Content');
  
 router.get('/', (req, res) => {
-    console.log('Get Request working');
+    // console.log('Get Request working');
     sellModel.find()
         .then((val) => {
             res.json(val); // Send the JSON response with the fetched data
