@@ -1,16 +1,16 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
-const sellModel = require('./Content');
+const newMeter = require('./NewMeterModel');
 app.use(express.json());
 
-router.post("/post", async (req, res, next) => {
-    const data = new sellModel({
+router.post("/", async (req, res, next) => {
+    const data = new newMeter({
       name: req.body.name,
       email: req.body.email,
       phone: req.body.phone,
       address: req.body.address,
-      units: req.body.units
+      landmark: req.body.landmark
     });
   
     try {

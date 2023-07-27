@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const home = require("./app-routes/Home");
 const buy = require("./app-routes/buy");
 const sell = require("./app-routes/Sell");
+const newMeter = require("./app-routes/NewMeter");
 const app = express();
 const cors = require('cors');
 app.use(bodyParser.json());
@@ -12,6 +13,7 @@ app.use(cors());
 // Attach routes to their endpoints
 app.use('/buy', buy);
 app.use('/sell', sell);
+app.use('/new', newMeter);
 app.use('/', home);
 
 // Connect to the database and start the server
